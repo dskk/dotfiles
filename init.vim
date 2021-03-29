@@ -4,7 +4,11 @@ let mapleader="\<Space>"
 let g:vimproc#download_windows_dll = 1
 
 " Pythonのパス
-let g:python3_host_prog = fnameescape(expand('C:\ProgramData\Anaconda3\python.exe'))
+if has("win64")
+ let g:python3_host_prog = 'C:\Windows\py.exe'
+elseif has("unix")
+ let g:python3_host_prog = substitute(system('which python'),"\n","","")
+endif
 
 " Neovim設定ディレクトリ
 let nvim_dir = substitute(expand($XDG_CONFIG_HOME) . '/nvim/', '\', '/', 'g')
