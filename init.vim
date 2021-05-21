@@ -5,7 +5,7 @@ let g:vimproc#download_windows_dll = 1
 
 " Pythonのパス
 if has("win64")
- let g:python3_host_prog = 'C:\Windows\py.exe'
+ let g:python3_host_prog = substitute(system('where py'),"\n","","")
 elseif has("unix")
  let g:python3_host_prog = substitute(system('which python'),"\n","","")
 endif
