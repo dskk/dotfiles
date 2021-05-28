@@ -6,6 +6,9 @@ hook_source = '''
     let g:deoplete#enable_at_startup = 1
     let g:deoplete#enable_ignore_case = 1
     call deoplete#custom#option('smart_case', v:true)
+    call deoplete#custom#var('omni', 'input_patterns', {
+    \ 'tex': g:vimtex#re#deoplete
+    \})
 
     " <TAB>: completion.
     imap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : deoplete#mappings#manual_complete()
@@ -63,3 +66,18 @@ hook_source = '''
 repo = 'zchee/deoplete-jedi'
 depends = ['deoplete.nvim']
 on_ft = ['python']
+
+[[plugins]]
+repo = 'lervag/vimtex'
+on_ft=['tex']
+hook_source='''
+  let g:vimtex_compiler_latexmk = {
+    \ 'executable' : 'latexmk',
+    \ 'options' : [
+    \   '-lualatex',
+    \   '-file-line-error',
+    \   '-synctex=1',
+    \   '-interaction=nonstopmode'
+    \ ],
+    \}
+'''    
